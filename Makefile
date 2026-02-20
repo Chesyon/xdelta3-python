@@ -1,13 +1,5 @@
-.PHONY: prepare
-prepare:
-	rm -rf xdelta3/lib/ || true
-	mkdir xdelta3/lib/
-	cp xdelta/xdelta3/xdelta3*.c xdelta3/lib/
-	cp xdelta/xdelta3/xdelta3*.h xdelta3/lib/
-	rm xdelta3/lib/*test.h
-
 .PHONY: install
-install: prepare
+install:
 	pip install -U setuptools pip
 	pip install -U .
 	pip install -r tests/requirements.txt
@@ -28,7 +20,7 @@ test: install
 	pytest --cov=xdelta3
 
 .PHONY: quickbuild
-quickbuild: prepare
+quickbuild:
 	rm *.so || true
 	python setup.py build --build-lib . && printf "\n  build succeeded\n\n"
 
@@ -45,7 +37,6 @@ clean:
 	rm -f `find . -type f -name '*.py[co]' `
 	rm -f `find . -type f -name '*~' `
 	rm -f `find . -type f -name '.*~' `
-	rm -rf xdelta3/lib/
 	rm -rf htmlcov
 	rm -rf *.egg-info
 	rm -rf *.so
