@@ -12,4 +12,3 @@ htmlcov/
 *.so
 /*.txt
 /*.whl
-/xdelta3/lib/
